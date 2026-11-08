@@ -1,0 +1,11 @@
+{
+  "churned_n": 11,
+  "retained_n": 494,
+  "median_delay_difference_days": 8.25,
+  "bootstrap_95pct_interval": [
+    4.497916666666667,
+    24.25
+  ],
+  "mann_whitney_p": 0.0018979639799565492,
+  "rank_biserial_effect": 0.5472948104527051
+}

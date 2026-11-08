@@ -1,0 +1,23 @@
+{
+  "checks": {
+    "two_native_pivots": true,
+    "xlookup_enrichment": true,
+    "data_validation": true,
+    "conditional_formatting": true,
+    "frozen_headers": true,
+    "sql_reconciliation": true,
+    "no_cached_formula_errors": true,
+    "xml_well_formed": true
+  },
+  "reconciliation_differences": {
+    "E5": 0,
+    "E6": 0,
+    "E7": 0,
+    "E8": 0,
+    "E13": 0,
+    "E14": 0,
+    "E15": 0
+  },
+  "errors": [],
+  "native_excel_edit_refresh": "Deferred by user: Office is unlicensed. Cached results and file structure are verified; these do not establish native recalculation."
+}

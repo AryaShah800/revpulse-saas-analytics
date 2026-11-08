@@ -1,0 +1,344 @@
+{
+  "status": "Portfolio delivery complete; native acceptance deferred by user",
+  "test_count": 12,
+  "run_id": "20261107T082251_ebe78748",
+  "requirements": [
+    {
+      "id": "R01",
+      "requirement": "Configurable CLI, empty exports, explicit errors",
+      "status": "verified",
+      "implementation": [
+        "src/revpulse/cli.py",
+        "src/revpulse/core.py",
+        "config/project.json"
+      ],
+      "evidence": [
+        "reports/test_results.xml"
+      ]
+    },
+    {
+      "id": "R02",
+      "requirement": "Pinned dependencies and independent environment reproduction",
+      "status": "verified",
+      "implementation": [
+        "pyproject.toml",
+        "requirements-lock.txt",
+        "scripts/verify_clean_environment.ps1"
+      ],
+      "evidence": [
+        "reports/reproducibility.json",
+        "reports/fresh_environment_tests.xml"
+      ]
+    },
+    {
+      "id": "R03",
+      "requirement": "Dated five-table generator with annual/monthly contracts and lifecycle changes",
+      "status": "verified",
+      "implementation": [
+        "src/revpulse/generate.py"
+      ],
+      "evidence": [
+        "reports/test_results.xml",
+        "docs/source_contracts.md"
+      ]
+    },
+    {
+      "id": "R04",
+      "requirement": "Isolated truth, defect manifest and immutable source hashes",
+      "status": "verified",
+      "implementation": [
+        "src/revpulse/generate.py"
+      ],
+      "evidence": [
+        "reports/test_results.xml",
+        "reports/defect_evaluation.json"
+      ]
+    },
+    {
+      "id": "R05",
+      "requirement": "Hand-calculated ten-account financial fixture",
+      "status": "verified",
+      "implementation": [
+        "tests/test_financial_contracts.py",
+        "tests/fixtures"
+      ],
+      "evidence": [
+        "reports/test_results.xml"
+      ]
+    },
+    {
+      "id": "R06",
+      "requirement": "Strict parsing, missing-amount recovery and quarantine",
+      "status": "verified",
+      "implementation": [
+        "src/revpulse/clean.py"
+      ],
+      "evidence": [
+        "reports/test_results.xml",
+        "DATA_CLEANING_LOG.md"
+      ]
+    },
+    {
+      "id": "R07",
+      "requirement": "Exact duplicates, conflicting keys, overlapping periods and parent integrity",
+      "status": "verified",
+      "implementation": [
+        "src/revpulse/clean.py",
+        "sql/migrations/001_core.sql"
+      ],
+      "evidence": [
+        "reports/test_results.xml"
+      ]
+    },
+    {
+      "id": "R08",
+      "requirement": "Lineage, dispositions, row reconciliation and exclusion disclosure",
+      "status": "verified",
+      "implementation": [
+        "src/revpulse/clean.py",
+        "src/revpulse/database.py"
+      ],
+      "evidence": [
+        "reports/quality.json",
+        "DATA_CLEANING_LOG.md"
+      ]
+    },
+    {
+      "id": "R09",
+      "requirement": "Actual PostgreSQL integration, constraints and versioned schemas",
+      "status": "verified",
+      "implementation": [
+        "src/revpulse/database.py",
+        "scripts/setup_postgres.py"
+      ],
+      "evidence": [
+        "reports/test_results.xml",
+        "reports/reconciliation.json"
+      ]
+    },
+    {
+      "id": "R10",
+      "requirement": "Atomic published core output pointer and failure preservation",
+      "status": "verified",
+      "implementation": [
+        "src/revpulse/pipeline.py"
+      ],
+      "evidence": [
+        "reports/test_results.xml"
+      ]
+    },
+    {
+      "id": "R11",
+      "requirement": "MRR, annual normalization, distinct accounts and revenue bridge",
+      "status": "verified",
+      "implementation": [
+        "sql/marts/001_marts.sql"
+      ],
+      "evidence": [
+        "reports/test_results.xml",
+        "reports/reconciliation.json"
+      ]
+    },
+    {
+      "id": "R12",
+      "requirement": "Historical balances, early/late payments, refunds and nonoverlapping aging",
+      "status": "verified",
+      "implementation": [
+        "sql/marts/001_marts.sql"
+      ],
+      "evidence": [
+        "reports/test_results.xml"
+      ]
+    },
+    {
+      "id": "R13",
+      "requirement": "Six analytical SQL queries, preaggregation, cohorts and unobserved periods",
+      "status": "verified",
+      "implementation": [
+        "sql/analytical_queries.sql"
+      ],
+      "evidence": [
+        "reports/test_results.xml"
+      ]
+    },
+    {
+      "id": "R14",
+      "requirement": "Excel XLOOKUP, validations, conditional formatting and SQL reconciliation",
+      "status": "verified",
+      "implementation": [
+        "excel/RevPulse_Validation_Audit.xlsx",
+        "scripts/build_workbook.mjs"
+      ],
+      "evidence": [
+        "reports/workbook/verification.json",
+        "reports/workbook/recalculation_checks.json"
+      ]
+    },
+    {
+      "id": "R15",
+      "requirement": "Two native PivotTables with caches and source references",
+      "status": "verified",
+      "implementation": [
+        "scripts/add_native_pivots.py",
+        "excel/RevPulse_Validation_Audit.xlsx"
+      ],
+      "evidence": [
+        "reports/workbook/verification.json"
+      ]
+    },
+    {
+      "id": "R16",
+      "requirement": "Workbook visual inspection across all six sheets",
+      "status": "verified",
+      "implementation": [
+        "excel/RevPulse_Validation_Audit.xlsx"
+      ],
+      "evidence": [
+        "reports/workbook/Overview.png",
+        "reports/workbook/Cleaned_Master.png",
+        "reports/workbook/Customers.png",
+        "reports/workbook/Payments.png",
+        "reports/workbook/Audit_Pivots.png",
+        "reports/workbook/Reconciliation.png"
+      ]
+    },
+    {
+      "id": "R17",
+      "requirement": "Native Excel open, input-change recalculation and pivot refresh",
+      "status": "deferred_by_user",
+      "implementation": [
+        "excel/RevPulse_Validation_Audit.xlsx"
+      ],
+      "evidence": [
+        "docs/NEXT_ACTION.md"
+      ]
+    },
+    {
+      "id": "R18",
+      "requirement": "Power BI project with two main pages and audit view",
+      "status": "implemented_schema_verified",
+      "implementation": [
+        "dashboard/RevPulse.pbip",
+        "scripts/build_powerbi.py"
+      ],
+      "evidence": [
+        "reports/powerbi_schema_validation.json"
+      ]
+    },
+    {
+      "id": "R19",
+      "requirement": "Semantic model relationships, snapshot measures and risk integration",
+      "status": "implemented_native_unverified",
+      "implementation": [
+        "dashboard/RevPulse.SemanticModel/model.bim",
+        "dashboard/measures.md"
+      ],
+      "evidence": [
+        "reports/powerbi_schema_validation.json"
+      ]
+    },
+    {
+      "id": "R20",
+      "requirement": "Native Power BI refresh, visual/filter inspection, PBIX and screenshots",
+      "status": "deferred_by_user",
+      "implementation": [
+        "dashboard/RevPulse.pbip"
+      ],
+      "evidence": [
+        "docs/NEXT_ACTION.md"
+      ]
+    },
+    {
+      "id": "R21",
+      "requirement": "Contract billing exceptions, peer IQR, support spikes and defect evaluation",
+      "status": "verified",
+      "implementation": [
+        "src/revpulse/analytics.py"
+      ],
+      "evidence": [
+        "reports/defect_evaluation.json"
+      ]
+    },
+    {
+      "id": "R22",
+      "requirement": "EDA and single-snapshot exploratory hypothesis with uncertainty",
+      "status": "verified",
+      "implementation": [
+        "notebooks/01_data_quality_and_eda.ipynb"
+      ],
+      "evidence": [
+        "reports/hypothesis_result.json"
+      ]
+    },
+    {
+      "id": "R23",
+      "requirement": "Point-in-time features and future-observation invariance",
+      "status": "verified",
+      "implementation": [
+        "src/revpulse/features.py"
+      ],
+      "evidence": [
+        "reports/test_results.xml"
+      ]
+    },
+    {
+      "id": "R24",
+      "requirement": "Observed churn labels and chronological train/validation/test splits",
+      "status": "verified",
+      "implementation": [
+        "src/revpulse/features.py",
+        "src/revpulse/model.py"
+      ],
+      "evidence": [
+        "reports/test_results.xml",
+        "reports/model_evaluation.json"
+      ]
+    },
+    {
+      "id": "R25",
+      "requirement": "Logistic/forest comparison, baselines, calibration and campaign-capacity metrics",
+      "status": "verified",
+      "implementation": [
+        "src/revpulse/model.py",
+        "notebooks/02_churn_evaluation.ipynb"
+      ],
+      "evidence": [
+        "reports/model_evaluation.json"
+      ]
+    },
+    {
+      "id": "R26",
+      "requirement": "Saved model, score export and model card",
+      "status": "verified",
+      "implementation": [
+        "models/churn_model.joblib",
+        "docs/model_card.md"
+      ],
+      "evidence": [
+        "reports/reproducibility.json"
+      ]
+    },
+    {
+      "id": "R27",
+      "requirement": "Executive findings, dictionaries, cleaning log and runbook",
+      "status": "verified",
+      "implementation": [
+        "README.md",
+        "reports/executive_summary.md",
+        "docs/data_dictionary.md",
+        "docs/metric_dictionary.md",
+        "docs/source_contracts.md",
+        "docs/runbook.md"
+      ],
+      "evidence": [
+        "reports/reconciliation.json",
+        "reports/model_evaluation.json"
+      ]
+    }
+  ],
+  "remaining": [
+    "Excel native editing/recalculation/PivotTable refresh",
+    "Power BI native refresh/DAX/filter/layout validation",
+    "Save validated PBIX and native screenshots"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "engine": "artifact-tool",
+  "amount_edit_propagates": true,
+  "missing_key_visible": true,
+  "test_edits_restored": true,
+  "native_excel": "Deferred by user"
+}

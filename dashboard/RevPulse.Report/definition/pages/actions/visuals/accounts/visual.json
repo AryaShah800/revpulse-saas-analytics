@@ -1,0 +1,193 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "accounts",
+  "position": {
+    "x": 20,
+    "y": 530,
+    "z": 0,
+    "width": 1000,
+    "height": 340,
+    "tabOrder": 550
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "TopRisk"
+                    }
+                  },
+                  "Property": "company_name"
+                }
+              },
+              "queryRef": "TopRisk.company_name",
+              "nativeQueryRef": "company_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "TopRisk"
+                    }
+                  },
+                  "Property": "churn_probability"
+                }
+              },
+              "queryRef": "TopRisk.churn_probability",
+              "nativeQueryRef": "churn_probability"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "TopRisk"
+                    }
+                  },
+                  "Property": "risk_category"
+                }
+              },
+              "queryRef": "TopRisk.risk_category",
+              "nativeQueryRef": "risk_category"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "TopRisk"
+                    }
+                  },
+                  "Property": "mrr_inr"
+                }
+              },
+              "queryRef": "TopRisk.mrr_inr",
+              "nativeQueryRef": "mrr_inr"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "TopRisk"
+                    }
+                  },
+                  "Property": "overdue_inr"
+                }
+              },
+              "queryRef": "TopRisk.overdue_inr",
+              "nativeQueryRef": "overdue_inr"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "TopRisk"
+                    }
+                  },
+                  "Property": "usage_change"
+                }
+              },
+              "queryRef": "TopRisk.usage_change",
+              "nativeQueryRef": "usage_change"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "TopRisk"
+                    }
+                  },
+                  "Property": "score_date"
+                }
+              },
+              "queryRef": "TopRisk.score_date",
+              "nativeQueryRef": "score_date"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Top 20 accounts by predicted risk (overall ranking)'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#19324F'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

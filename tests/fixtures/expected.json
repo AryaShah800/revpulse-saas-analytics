@@ -1,0 +1,14 @@
+{
+  "january_mrr_paise": 1050000,
+  "february_mrr_paise": 950000,
+  "march_mrr_paise": 1000000,
+  "january_accounts": 10,
+  "february_accounts": 8,
+  "march_accounts": 9,
+  "june_balances_paise": {
+    "I1": 1200000,
+    "I6": 60000,
+    "I7": 10000,
+    "I8": 100000
+  }
+}

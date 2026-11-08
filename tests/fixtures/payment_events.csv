@@ -1,0 +1,6 @@
+event_id,invoice_id,event_date,available_date,event_type,status,amount_paise
+E1,I6,2023-01-10,2023-01-10,payment,succeeded,40000
+E2,I6,2023-07-01,2023-07-01,payment,succeeded,60000
+E3,I7,2023-01-10,2023-01-10,payment,succeeded,100000
+E4,I7,2023-02-01,2023-02-01,refund,succeeded,10000
+E5,I8,2023-07-01,2023-07-01,payment,succeeded,100000

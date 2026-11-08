@@ -1,0 +1,14 @@
+period_id,subscription_id,customer_id,effective_from,effective_to,plan_tier,billing_months,recurring_paise,discount_paise
+annual,annual,C1,2023-01-01,2100-01-01,Starter,12,1200000,0
+base,base,C2,2023-01-01,2100-01-01,Starter,1,100000,0
+addon,addon,C2,2023-01-01,2023-03-01,Starter,1,50000,0
+upgrade1,upgrade,C3,2023-01-01,2023-02-01,Starter,1,100000,0
+upgrade2,upgrade,C3,2023-02-01,2100-01-01,Starter,1,200000,0
+cancel,cancel,C4,2023-01-01,2023-02-01,Starter,1,100000,0
+react1,react,C5,2023-01-01,2023-02-01,Starter,1,100000,0
+react2,react,C5,2023-03-01,2100-01-01,Starter,1,100000,0
+P6,P6,C6,2023-01-01,2100-01-01,Starter,1,100000,0
+P7,P7,C7,2023-01-01,2100-01-01,Starter,1,100000,0
+P8,P8,C8,2023-01-01,2100-01-01,Starter,1,100000,0
+P9,P9,C9,2023-01-01,2100-01-01,Starter,1,100000,0
+P10,P10,C10,2023-01-01,2100-01-01,Starter,1,100000,0

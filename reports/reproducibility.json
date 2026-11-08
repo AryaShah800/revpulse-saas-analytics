@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "primary_run": "20261107T082251_ebe78748",
+  "independent_run": "20261107T082304_e089e3f7",
+  "checks": {
+    "clean_customers": true,
+    "clean_subscription_periods": true,
+    "clean_invoices": true,
+    "clean_payment_events": true,
+    "clean_customer_monthly_activity": true,
+    "dim_date": true,
+    "fact_subscription_month": true,
+    "mart_billing_exceptions": true,
+    "mart_cohort_retention": true,
+    "mart_collections_month": true,
+    "mart_customer_month": true,
+    "mart_invoice_aging": true,
+    "mart_payment_delay": true,
+    "mart_revenue_month": true,
+    "churn_predictions": true,
+    "model_metrics": true
+  },
+  "numeric_tolerance": "1e-12 for evaluation metrics; parallel forest accumulation differs at approximately 1e-18. Scores compared at 1e-10. Source CSVs and sorted SQL marts match exactly.",
+  "scope": "Separate source checkout and virtual environment; shared local PostgreSQL server with isolated per-run schemas. Native Excel and Power BI validation deferred by user."
+}

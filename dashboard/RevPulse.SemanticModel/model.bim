@@ -1,0 +1,1081 @@
+{
+  "name": "RevPulse",
+  "compatibilityLevel": 1567,
+  "model": {
+    "culture": "en-US",
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "Customers",
+        "columns": [
+          {
+            "name": "customer_id",
+            "dataType": "string",
+            "sourceColumn": "customer_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "company_name",
+            "dataType": "string",
+            "sourceColumn": "company_name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "signup_date",
+            "dataType": "dateTime",
+            "sourceColumn": "signup_date",
+            "summarizeBy": "none",
+            "formatString": "dd MMM yyyy"
+          },
+          {
+            "name": "region",
+            "dataType": "string",
+            "sourceColumn": "region",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "acquisition_channel",
+            "dataType": "string",
+            "sourceColumn": "acquisition_channel",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Customers",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"customers.csv\"),[Delimiter=\",\",Encoding=65001,QuoteStyle=QuoteStyle.Csv]),",
+                "    Headers = Table.PromoteHeaders(Source,[PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Headers,{{\"customer_id\", type text},{\"company_name\", type text},{\"signup_date\", type date},{\"region\", type text},{\"acquisition_channel\", type text}},\"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Dates",
+        "columns": [
+          {
+            "name": "month",
+            "dataType": "dateTime",
+            "sourceColumn": "month",
+            "summarizeBy": "none",
+            "formatString": "dd MMM yyyy"
+          },
+          {
+            "name": "month_end",
+            "dataType": "dateTime",
+            "sourceColumn": "month_end",
+            "summarizeBy": "none",
+            "formatString": "dd MMM yyyy"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Dates",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"dim_date.csv\"),[Delimiter=\",\",Encoding=65001,QuoteStyle=QuoteStyle.Csv]),",
+                "    Headers = Table.PromoteHeaders(Source,[PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Headers,{{\"month\", type date},{\"month_end\", type date}},\"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Plans",
+        "columns": [
+          {
+            "name": "plan_tier",
+            "dataType": "string",
+            "sourceColumn": "plan_tier",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Plans",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"dim_plan.csv\"),[Delimiter=\",\",Encoding=65001,QuoteStyle=QuoteStyle.Csv]),",
+                "    Headers = Table.PromoteHeaders(Source,[PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Headers,{{\"plan_tier\", type text}},\"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "CustomerMonth",
+        "columns": [
+          {
+            "name": "customer_id",
+            "dataType": "string",
+            "sourceColumn": "customer_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "company_name",
+            "dataType": "string",
+            "sourceColumn": "company_name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "region",
+            "dataType": "string",
+            "sourceColumn": "region",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "acquisition_channel",
+            "dataType": "string",
+            "sourceColumn": "acquisition_channel",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "month",
+            "dataType": "dateTime",
+            "sourceColumn": "month",
+            "summarizeBy": "none",
+            "formatString": "dd MMM yyyy"
+          },
+          {
+            "name": "month_end",
+            "dataType": "dateTime",
+            "sourceColumn": "month_end",
+            "summarizeBy": "none",
+            "formatString": "dd MMM yyyy"
+          },
+          {
+            "name": "mrr_paise",
+            "dataType": "double",
+            "sourceColumn": "mrr_paise",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "plan_tier",
+            "dataType": "string",
+            "sourceColumn": "plan_tier",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "opening_mrr_paise",
+            "dataType": "double",
+            "sourceColumn": "opening_mrr_paise",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "historical_max",
+            "dataType": "double",
+            "sourceColumn": "historical_max",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "movement",
+            "dataType": "string",
+            "sourceColumn": "movement",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CustomerMonth",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"mart_customer_month.csv\"),[Delimiter=\",\",Encoding=65001,QuoteStyle=QuoteStyle.Csv]),",
+                "    Headers = Table.PromoteHeaders(Source,[PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Headers,{{\"customer_id\", type text},{\"company_name\", type text},{\"region\", type text},{\"acquisition_channel\", type text},{\"month\", type date},{\"month_end\", type date},{\"mrr_paise\", type number},{\"plan_tier\", type text},{\"opening_mrr_paise\", type number},{\"historical_max\", type number},{\"movement\", type text}},\"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "MRR INR",
+            "expression": "VAR d = MAX(Dates[month]) RETURN CALCULATE(SUM(CustomerMonth[mrr_paise])/100, Dates[month]=d)",
+            "formatString": "\u20b9#,##0; (\u20b9#,##0)"
+          },
+          {
+            "name": "Active accounts",
+            "expression": "VAR d = MAX(Dates[month]) RETURN CALCULATE(DISTINCTCOUNT(CustomerMonth[customer_id]),Dates[month]=d,CustomerMonth[mrr_paise]>0)",
+            "formatString": "#,##0"
+          },
+          {
+            "name": "Opening MRR INR",
+            "expression": "VAR d = MAX(Dates[month]) RETURN CALCULATE(SUM(CustomerMonth[opening_mrr_paise])/100,Dates[month]=d)",
+            "formatString": "\u20b9#,##0; (\u20b9#,##0)"
+          },
+          {
+            "name": "MoM growth",
+            "expression": "DIVIDE([MRR INR]-[Opening MRR INR],[Opening MRR INR])",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "NRR",
+            "expression": "VAR d = MAX(Dates[month]) RETURN DIVIDE(CALCULATE(SUM(CustomerMonth[mrr_paise]),Dates[month]=d,CustomerMonth[opening_mrr_paise]>0),CALCULATE(SUM(CustomerMonth[opening_mrr_paise]),Dates[month]=d))",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Customer churn",
+            "expression": "VAR d = MAX(Dates[month]) RETURN DIVIDE(CALCULATE(COUNTROWS(CustomerMonth),Dates[month]=d,CustomerMonth[movement]=\"Churn\"),CALCULATE(COUNTROWS(CustomerMonth),Dates[month]=d,CustomerMonth[opening_mrr_paise]>0))",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "ARPA INR",
+            "expression": "DIVIDE([MRR INR],[Active accounts])",
+            "formatString": "\u20b9#,##0; (\u20b9#,##0)"
+          },
+          {
+            "name": "Overdue INR",
+            "expression": "CALCULATE(SUM(Invoices[outstanding_paise])/100,Invoices[days_overdue]>0)",
+            "formatString": "\u20b9#,##0; (\u20b9#,##0)"
+          },
+          {
+            "name": "Outstanding INR",
+            "expression": "SUM(Invoices[outstanding_paise])/100",
+            "formatString": "\u20b9#,##0; (\u20b9#,##0)"
+          },
+          {
+            "name": "High-risk MRR INR",
+            "expression": "CALCULATE(SUM(Risk[mrr_inr]),Risk[risk_category]=\"High\")",
+            "formatString": "\u20b9#,##0; (\u20b9#,##0)"
+          },
+          {
+            "name": "Billing flags",
+            "expression": "DISTINCTCOUNT(Anomalies[record_id])",
+            "formatString": "#,##0"
+          },
+          {
+            "name": "Risk accounts",
+            "expression": "CALCULATE(COUNTROWS(Risk),Risk[risk_category]=\"High\")",
+            "formatString": "#,##0"
+          },
+          {
+            "name": "MRR change INR",
+            "expression": "VAR d = MAX(Dates[month]) RETURN VAR s = SELECTEDVALUE(Bridge[stage]) RETURN CALCULATE(SUMX(CustomerMonth,IF(s=\"Churn\" || s=\"Contraction\",CustomerMonth[mrr_paise]-CustomerMonth[opening_mrr_paise],IF(s=\"New\" || s=\"Reactivation\",CustomerMonth[mrr_paise],CustomerMonth[mrr_paise]-CustomerMonth[opening_mrr_paise])))/100,Dates[month]=d,CustomerMonth[movement]=s)",
+            "formatString": "\u20b9#,##0; (\u20b9#,##0)"
+          }
+        ]
+      },
+      {
+        "name": "Invoices",
+        "columns": [
+          {
+            "name": "invoice_id",
+            "dataType": "string",
+            "sourceColumn": "invoice_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "customer_id",
+            "dataType": "string",
+            "sourceColumn": "customer_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "period_id",
+            "dataType": "string",
+            "sourceColumn": "period_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "issue_date",
+            "dataType": "dateTime",
+            "sourceColumn": "issue_date",
+            "summarizeBy": "none",
+            "formatString": "dd MMM yyyy"
+          },
+          {
+            "name": "due_date",
+            "dataType": "dateTime",
+            "sourceColumn": "due_date",
+            "summarizeBy": "none",
+            "formatString": "dd MMM yyyy"
+          },
+          {
+            "name": "service_from",
+            "dataType": "dateTime",
+            "sourceColumn": "service_from",
+            "summarizeBy": "none",
+            "formatString": "dd MMM yyyy"
+          },
+          {
+            "name": "service_to",
+            "dataType": "dateTime",
+            "sourceColumn": "service_to",
+            "summarizeBy": "none",
+            "formatString": "dd MMM yyyy"
+          },
+          {
+            "name": "recurring_paise",
+            "dataType": "int64",
+            "sourceColumn": "recurring_paise",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "one_time_paise",
+            "dataType": "int64",
+            "sourceColumn": "one_time_paise",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "tax_paise",
+            "dataType": "int64",
+            "sourceColumn": "tax_paise",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "total_paise",
+            "dataType": "int64",
+            "sourceColumn": "total_paise",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "region",
+            "dataType": "string",
+            "sourceColumn": "region",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "acquisition_channel",
+            "dataType": "string",
+            "sourceColumn": "acquisition_channel",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "plan_tier",
+            "dataType": "string",
+            "sourceColumn": "plan_tier",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "cutoff",
+            "dataType": "dateTime",
+            "sourceColumn": "cutoff",
+            "summarizeBy": "none",
+            "formatString": "dd MMM yyyy"
+          },
+          {
+            "name": "net_paid_paise",
+            "dataType": "int64",
+            "sourceColumn": "net_paid_paise",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "outstanding_paise",
+            "dataType": "int64",
+            "sourceColumn": "outstanding_paise",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "credit_paise",
+            "dataType": "int64",
+            "sourceColumn": "credit_paise",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "days_overdue",
+            "dataType": "int64",
+            "sourceColumn": "days_overdue",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "aging_bucket",
+            "dataType": "string",
+            "sourceColumn": "aging_bucket",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Invoices",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"mart_invoice_aging.csv\"),[Delimiter=\",\",Encoding=65001,QuoteStyle=QuoteStyle.Csv]),",
+                "    Headers = Table.PromoteHeaders(Source,[PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Headers,{{\"invoice_id\", type text},{\"customer_id\", type text},{\"period_id\", type text},{\"issue_date\", type date},{\"due_date\", type date},{\"service_from\", type date},{\"service_to\", type date},{\"recurring_paise\", Int64.Type},{\"one_time_paise\", Int64.Type},{\"tax_paise\", Int64.Type},{\"total_paise\", Int64.Type},{\"region\", type text},{\"acquisition_channel\", type text},{\"plan_tier\", type text},{\"cutoff\", type date},{\"net_paid_paise\", Int64.Type},{\"outstanding_paise\", Int64.Type},{\"credit_paise\", Int64.Type},{\"days_overdue\", Int64.Type},{\"aging_bucket\", type text}},\"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Risk",
+        "columns": [
+          {
+            "name": "customer_id",
+            "dataType": "string",
+            "sourceColumn": "customer_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "company_name",
+            "dataType": "string",
+            "sourceColumn": "company_name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "region",
+            "dataType": "string",
+            "sourceColumn": "region",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "acquisition_channel",
+            "dataType": "string",
+            "sourceColumn": "acquisition_channel",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "score_date",
+            "dataType": "dateTime",
+            "sourceColumn": "score_date",
+            "summarizeBy": "none",
+            "formatString": "dd MMM yyyy"
+          },
+          {
+            "name": "usage_ratio",
+            "dataType": "double",
+            "sourceColumn": "usage_ratio",
+            "summarizeBy": "sum",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "usage_change",
+            "dataType": "double",
+            "sourceColumn": "usage_change",
+            "summarizeBy": "sum",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "tickets_opened",
+            "dataType": "double",
+            "sourceColumn": "tickets_opened",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "unresolved_tickets",
+            "dataType": "double",
+            "sourceColumn": "unresolved_tickets",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "csat_score",
+            "dataType": "double",
+            "sourceColumn": "csat_score",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "csat_missing",
+            "dataType": "int64",
+            "sourceColumn": "csat_missing",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "tenure_months",
+            "dataType": "int64",
+            "sourceColumn": "tenure_months",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "mrr_inr",
+            "dataType": "double",
+            "sourceColumn": "mrr_inr",
+            "summarizeBy": "sum",
+            "formatString": "\u20b9#,##0.00"
+          },
+          {
+            "name": "overdue_inr",
+            "dataType": "double",
+            "sourceColumn": "overdue_inr",
+            "summarizeBy": "sum",
+            "formatString": "\u20b9#,##0.00"
+          },
+          {
+            "name": "average_delay_days",
+            "dataType": "double",
+            "sourceColumn": "average_delay_days",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "plan_tier",
+            "dataType": "string",
+            "sourceColumn": "plan_tier",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "churn_probability",
+            "dataType": "double",
+            "sourceColumn": "churn_probability",
+            "summarizeBy": "sum",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "risk_category",
+            "dataType": "string",
+            "sourceColumn": "risk_category",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "model_version",
+            "dataType": "string",
+            "sourceColumn": "model_version",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "model_training_run",
+            "dataType": "string",
+            "sourceColumn": "model_training_run",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Risk",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"churn_predictions.csv\"),[Delimiter=\",\",Encoding=65001,QuoteStyle=QuoteStyle.Csv]),",
+                "    Headers = Table.PromoteHeaders(Source,[PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Headers,{{\"customer_id\", type text},{\"company_name\", type text},{\"region\", type text},{\"acquisition_channel\", type text},{\"score_date\", type date},{\"usage_ratio\", type number},{\"usage_change\", type number},{\"tickets_opened\", type number},{\"unresolved_tickets\", type number},{\"csat_score\", type number},{\"csat_missing\", Int64.Type},{\"tenure_months\", Int64.Type},{\"mrr_inr\", type number},{\"overdue_inr\", type number},{\"average_delay_days\", type number},{\"plan_tier\", type text},{\"churn_probability\", type number},{\"risk_category\", type text},{\"model_version\", type text},{\"model_training_run\", type text}},\"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "TopRisk",
+        "columns": [
+          {
+            "name": "customer_id",
+            "dataType": "string",
+            "sourceColumn": "customer_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "company_name",
+            "dataType": "string",
+            "sourceColumn": "company_name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "region",
+            "dataType": "string",
+            "sourceColumn": "region",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "acquisition_channel",
+            "dataType": "string",
+            "sourceColumn": "acquisition_channel",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "score_date",
+            "dataType": "dateTime",
+            "sourceColumn": "score_date",
+            "summarizeBy": "none",
+            "formatString": "dd MMM yyyy"
+          },
+          {
+            "name": "usage_ratio",
+            "dataType": "double",
+            "sourceColumn": "usage_ratio",
+            "summarizeBy": "sum",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "usage_change",
+            "dataType": "double",
+            "sourceColumn": "usage_change",
+            "summarizeBy": "sum",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "tickets_opened",
+            "dataType": "double",
+            "sourceColumn": "tickets_opened",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "unresolved_tickets",
+            "dataType": "double",
+            "sourceColumn": "unresolved_tickets",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "csat_score",
+            "dataType": "double",
+            "sourceColumn": "csat_score",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "csat_missing",
+            "dataType": "int64",
+            "sourceColumn": "csat_missing",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "tenure_months",
+            "dataType": "int64",
+            "sourceColumn": "tenure_months",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "mrr_inr",
+            "dataType": "double",
+            "sourceColumn": "mrr_inr",
+            "summarizeBy": "sum",
+            "formatString": "\u20b9#,##0.00"
+          },
+          {
+            "name": "overdue_inr",
+            "dataType": "double",
+            "sourceColumn": "overdue_inr",
+            "summarizeBy": "sum",
+            "formatString": "\u20b9#,##0.00"
+          },
+          {
+            "name": "average_delay_days",
+            "dataType": "double",
+            "sourceColumn": "average_delay_days",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "plan_tier",
+            "dataType": "string",
+            "sourceColumn": "plan_tier",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "churn_probability",
+            "dataType": "double",
+            "sourceColumn": "churn_probability",
+            "summarizeBy": "sum",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "risk_category",
+            "dataType": "string",
+            "sourceColumn": "risk_category",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "model_version",
+            "dataType": "string",
+            "sourceColumn": "model_version",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "model_training_run",
+            "dataType": "string",
+            "sourceColumn": "model_training_run",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "TopRisk",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"top20_risk.csv\"),[Delimiter=\",\",Encoding=65001,QuoteStyle=QuoteStyle.Csv]),",
+                "    Headers = Table.PromoteHeaders(Source,[PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Headers,{{\"customer_id\", type text},{\"company_name\", type text},{\"region\", type text},{\"acquisition_channel\", type text},{\"score_date\", type date},{\"usage_ratio\", type number},{\"usage_change\", type number},{\"tickets_opened\", type number},{\"unresolved_tickets\", type number},{\"csat_score\", type number},{\"csat_missing\", Int64.Type},{\"tenure_months\", Int64.Type},{\"mrr_inr\", type number},{\"overdue_inr\", type number},{\"average_delay_days\", type number},{\"plan_tier\", type text},{\"churn_probability\", type number},{\"risk_category\", type text},{\"model_version\", type text},{\"model_training_run\", type text}},\"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Anomalies",
+        "columns": [
+          {
+            "name": "record_id",
+            "dataType": "string",
+            "sourceColumn": "record_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "customer_id",
+            "dataType": "string",
+            "sourceColumn": "customer_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "rule",
+            "dataType": "string",
+            "sourceColumn": "rule",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "observed_paise",
+            "dataType": "int64",
+            "sourceColumn": "observed_paise",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "expected_paise",
+            "dataType": "double",
+            "sourceColumn": "expected_paise",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "severity",
+            "dataType": "string",
+            "sourceColumn": "severity",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "review_status",
+            "dataType": "string",
+            "sourceColumn": "review_status",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Anomalies",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"billing_anomalies.csv\"),[Delimiter=\",\",Encoding=65001,QuoteStyle=QuoteStyle.Csv]),",
+                "    Headers = Table.PromoteHeaders(Source,[PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Headers,{{\"record_id\", type text},{\"customer_id\", type text},{\"rule\", type text},{\"observed_paise\", Int64.Type},{\"expected_paise\", type number},{\"severity\", type text},{\"review_status\", type text}},\"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Bridge",
+        "columns": [
+          {
+            "name": "stage",
+            "dataType": "string",
+            "sourceColumn": "stage",
+            "summarizeBy": "none",
+            "sortByColumn": "sort"
+          },
+          {
+            "name": "sort",
+            "dataType": "int64",
+            "sourceColumn": "sort",
+            "summarizeBy": "sum"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Bridge",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"dim_bridge.csv\"),[Delimiter=\",\",Encoding=65001,QuoteStyle=QuoteStyle.Csv]),",
+                "    Headers = Table.PromoteHeaders(Source,[PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Headers,{{\"stage\", type text},{\"sort\", Int64.Type}},\"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Quality",
+        "columns": [
+          {
+            "name": "table_name",
+            "dataType": "string",
+            "sourceColumn": "table_name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "input",
+            "dataType": "int64",
+            "sourceColumn": "input",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "accepted",
+            "dataType": "int64",
+            "sourceColumn": "accepted",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "duplicate",
+            "dataType": "int64",
+            "sourceColumn": "duplicate",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "quarantined",
+            "dataType": "int64",
+            "sourceColumn": "quarantined",
+            "summarizeBy": "sum"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Quality",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"quality_summary.csv\"),[Delimiter=\",\",Encoding=65001,QuoteStyle=QuoteStyle.Csv]),",
+                "    Headers = Table.PromoteHeaders(Source,[PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Headers,{{\"table_name\", type text},{\"input\", Int64.Type},{\"accepted\", Int64.Type},{\"duplicate\", Int64.Type},{\"quarantined\", Int64.Type}},\"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Metadata",
+        "columns": [
+          {
+            "name": "cutoff",
+            "dataType": "dateTime",
+            "sourceColumn": "cutoff",
+            "summarizeBy": "none",
+            "formatString": "dd MMM yyyy"
+          },
+          {
+            "name": "run_id",
+            "dataType": "string",
+            "sourceColumn": "run_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "data_type",
+            "dataType": "string",
+            "sourceColumn": "data_type",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "definitions",
+            "dataType": "string",
+            "sourceColumn": "definitions",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "coverage",
+            "dataType": "string",
+            "sourceColumn": "coverage",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "model",
+            "dataType": "string",
+            "sourceColumn": "model",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Metadata",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"report_metadata.csv\"),[Delimiter=\",\",Encoding=65001,QuoteStyle=QuoteStyle.Csv]),",
+                "    Headers = Table.PromoteHeaders(Source,[PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Headers,{{\"cutoff\", type date},{\"run_id\", type text},{\"data_type\", type text},{\"definitions\", type text},{\"coverage\", type text},{\"model\", type text}},\"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Cohorts",
+        "columns": [
+          {
+            "name": "cohort",
+            "dataType": "dateTime",
+            "sourceColumn": "cohort",
+            "summarizeBy": "none",
+            "formatString": "dd MMM yyyy"
+          },
+          {
+            "name": "age",
+            "dataType": "int64",
+            "sourceColumn": "age",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "cohort_size",
+            "dataType": "int64",
+            "sourceColumn": "cohort_size",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "retention",
+            "dataType": "double",
+            "sourceColumn": "retention",
+            "summarizeBy": "sum",
+            "formatString": "0.0%"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Cohorts",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"mart_cohort_retention.csv\"),[Delimiter=\",\",Encoding=65001,QuoteStyle=QuoteStyle.Csv]),",
+                "    Headers = Table.PromoteHeaders(Source,[PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Headers,{{\"cohort\", type date},{\"age\", Int64.Type},{\"cohort_size\", Int64.Type},{\"retention\", type number}},\"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "c23af094-31df-5f09-93a7-cacf2e7ab205",
+        "fromTable": "CustomerMonth",
+        "fromColumn": "customer_id",
+        "toTable": "Customers",
+        "toColumn": "customer_id",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "4532b003-38c6-5ee1-8779-48b238f9998b",
+        "fromTable": "Invoices",
+        "fromColumn": "customer_id",
+        "toTable": "Customers",
+        "toColumn": "customer_id",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "9781d73f-7ba3-579d-93bd-b85d49c9b3d5",
+        "fromTable": "Risk",
+        "fromColumn": "customer_id",
+        "toTable": "Customers",
+        "toColumn": "customer_id",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "d4399414-bc80-5056-a79a-ba7ba65d015e",
+        "fromTable": "TopRisk",
+        "fromColumn": "customer_id",
+        "toTable": "Customers",
+        "toColumn": "customer_id",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "792f5b4d-f106-52ca-a378-a96015a26799",
+        "fromTable": "Anomalies",
+        "fromColumn": "customer_id",
+        "toTable": "Customers",
+        "toColumn": "customer_id",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "2414bcea-1464-5c29-96f6-135063240cf9",
+        "fromTable": "CustomerMonth",
+        "fromColumn": "month",
+        "toTable": "Dates",
+        "toColumn": "month",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "cc557012-9ed3-5b32-aea9-6830dda4b1f4",
+        "fromTable": "CustomerMonth",
+        "fromColumn": "plan_tier",
+        "toTable": "Plans",
+        "toColumn": "plan_tier",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "7b4a0b01-79ad-5b7b-a714-555c53230f43",
+        "fromTable": "Invoices",
+        "fromColumn": "plan_tier",
+        "toTable": "Plans",
+        "toColumn": "plan_tier",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "e44f69bd-66f2-5524-b3a1-157a61b94798",
+        "fromTable": "Risk",
+        "fromColumn": "plan_tier",
+        "toTable": "Plans",
+        "toColumn": "plan_tier",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "6a43f2cb-8b5a-5f47-9de7-1e4322ca20fd",
+        "fromTable": "TopRisk",
+        "fromColumn": "plan_tier",
+        "toTable": "Plans",
+        "toColumn": "plan_tier",
+        "crossFilteringBehavior": "oneDirection"
+      }
+    ],
+    "expressions": [
+      {
+        "name": "DataFolder",
+        "kind": "m",
+        "expression": "\"C:/Projects/revpulse-saas-analytics/dashboard/data/\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"DataFolder\", \"Customers\", \"Dates\", \"Plans\", \"CustomerMonth\", \"Invoices\", \"Risk\", \"TopRisk\", \"Anomalies\", \"Bridge\", \"Quality\", \"Metadata\", \"Cohorts\"]"
+      }
+    ]
+  }
+}

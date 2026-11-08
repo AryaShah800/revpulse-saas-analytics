@@ -1,0 +1,14 @@
+{
+  "checks": {
+    "invoice_total": true,
+    "collections_total": true,
+    "mrr_bridge": true,
+    "month_end_mrr": true,
+    "distinct_active_accounts": true,
+    "balance_identity": true
+  },
+  "invoiced_paise": 16343289600,
+  "net_collections_paise": 15390947680,
+  "closing_mrr_paise": "362290000",
+  "active_accounts": 651
+}

@@ -1,0 +1,108 @@
+{
+  "injected": [
+    {
+      "table": "invoices",
+      "key": "C0001-P1-202304",
+      "kind": "exact_duplicate",
+      "quarantined": false,
+      "duplicate_detected": true,
+      "anomaly_flagged": false,
+      "transformed": false,
+      "handled": true
+    },
+    {
+      "table": "invoices",
+      "key": "C0001-P2-202305",
+      "kind": "recoverable_missing",
+      "quarantined": false,
+      "duplicate_detected": false,
+      "anomaly_flagged": false,
+      "transformed": true,
+      "handled": true
+    },
+    {
+      "table": "invoices",
+      "key": "C0001-P2-202306",
+      "kind": "invoice_mismatch",
+      "quarantined": true,
+      "duplicate_detected": false,
+      "anomaly_flagged": false,
+      "transformed": false,
+      "handled": true
+    },
+    {
+      "table": "invoices",
+      "key": "C0001-P2-202307",
+      "kind": "conflicting_key",
+      "quarantined": true,
+      "duplicate_detected": false,
+      "anomaly_flagged": false,
+      "transformed": false,
+      "handled": true
+    },
+    {
+      "table": "invoices",
+      "key": "C0001-ADD-202307",
+      "kind": "orphan_customer",
+      "quarantined": true,
+      "duplicate_detected": false,
+      "anomaly_flagged": false,
+      "transformed": false,
+      "handled": true
+    },
+    {
+      "table": "invoices",
+      "key": "C0001-P2-202308",
+      "kind": "ambiguous_date",
+      "quarantined": true,
+      "duplicate_detected": false,
+      "anomaly_flagged": false,
+      "transformed": false,
+      "handled": true
+    },
+    {
+      "table": "invoices",
+      "key": "C0001-ADD-202308",
+      "kind": "contract_mismatch",
+      "quarantined": false,
+      "duplicate_detected": false,
+      "anomaly_flagged": true,
+      "transformed": false,
+      "handled": true
+    },
+    {
+      "table": "customer_monthly_activity",
+      "key": "C0001-202304",
+      "kind": "invalid_usage",
+      "quarantined": true,
+      "duplicate_detected": false,
+      "anomaly_flagged": false,
+      "transformed": false,
+      "handled": true
+    },
+    {
+      "table": "customers",
+      "key": "C0001",
+      "kind": "region_variant",
+      "quarantined": false,
+      "duplicate_detected": false,
+      "anomaly_flagged": false,
+      "transformed": true,
+      "handled": true
+    }
+  ],
+  "statistical_flags": 1567,
+  "business_flags": 1,
+  "business_rule_evaluation": {
+    "true_positives": 1,
+    "false_positives": 0,
+    "false_negatives": 0
+  },
+  "statistical_error_detection_evaluation": {
+    "true_positives": 0,
+    "false_positives": 1567,
+    "false_negatives": 1,
+    "scope": "Accepted invoices only. Treating IQR as an error detector produces false positives on valid simulated add-ons; flags remain investigation candidates."
+  },
+  "note": "Statistical flags are investigation candidates; they are not removed. Defect manifest is used for evaluation only."
+}

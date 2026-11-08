@@ -1,0 +1,27 @@
+{
+  "customers": {
+    "input": 1000,
+    "accepted": 1000,
+    "duplicates": 0
+  },
+  "subscriptions": {
+    "input": 1000,
+    "accepted": 1000,
+    "duplicates": 0
+  },
+  "invoices": {
+    "input": 18635,
+    "accepted": 18634,
+    "duplicates": 1
+  },
+  "payments": {
+    "input": 17101,
+    "accepted": 17101,
+    "duplicates": 0
+  },
+  "activity": {
+    "input": 18634,
+    "accepted": 18634,
+    "duplicates": 0
+  }
+}

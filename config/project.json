@@ -1,0 +1,12 @@
+{
+  "seed": 42,
+  "accounts": 1000,
+  "start": "2023-01-01",
+  "months": 36,
+  "currency": "INR",
+  "monetary_storage": "integer paise",
+  "business_timezone": "Asia/Calcutta",
+  "source_date_format": "YYYY-MM-DD",
+  "minimum_peer_group": 20,
+  "campaign_capacity": 20
+}

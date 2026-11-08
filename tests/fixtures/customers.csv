@@ -1,0 +1,11 @@
+customer_id,company_name,signup_date,region,acquisition_channel
+C1,Fixture 1,2023-01-01,West,Organic
+C2,Fixture 2,2023-01-01,West,Organic
+C3,Fixture 3,2023-01-01,West,Organic
+C4,Fixture 4,2023-01-01,West,Organic
+C5,Fixture 5,2023-01-01,West,Organic
+C6,Fixture 6,2023-01-01,West,Organic
+C7,Fixture 7,2023-01-01,West,Organic
+C8,Fixture 8,2023-01-01,West,Organic
+C9,Fixture 9,2023-01-01,West,Organic
+C10,Fixture 10,2023-01-01,West,Organic

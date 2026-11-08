@@ -1,0 +1,37 @@
+{
+  "tables": {
+    "customers": {
+      "input": 1000,
+      "accepted": 1000,
+      "duplicate": 0,
+      "quarantined": 0
+    },
+    "subscription_periods": {
+      "input": 3223,
+      "accepted": 3223,
+      "duplicate": 0,
+      "quarantined": 0
+    },
+    "invoices": {
+      "input": 15441,
+      "accepted": 15435,
+      "duplicate": 1,
+      "quarantined": 5
+    },
+    "payment_events": {
+      "input": 17697,
+      "accepted": 17693,
+      "duplicate": 0,
+      "quarantined": 4
+    },
+    "customer_monthly_activity": {
+      "input": 22124,
+      "accepted": 22123,
+      "duplicate": 0,
+      "quarantined": 1
+    }
+  },
+  "transformations": 2,
+  "source_id": "0e2355d902841a41",
+  "unknown_financial_amounts": "Missing totals recovered only when all authoritative components exist. Quarantine is excluded and counted."
+}
