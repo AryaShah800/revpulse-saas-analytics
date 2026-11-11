@@ -1,14 +1,14 @@
 # RevPulse BI
 
+[![Tests](https://github.com/AryaShah800/revpulse-saas-analytics/actions/workflows/tests.yml/badge.svg)](https://github.com/AryaShah800/revpulse-saas-analytics/actions/workflows/tests.yml)
+
 Reproducible B2B SaaS revenue, billing quality and retention analytics. **All data is synthetic.** The project separates recurring revenue, invoicing and cash collections, preserves source lineage, and evaluates churn predictions using chronological splits.
 
-## Delivery status
+## What's included
 
 Implemented and tested: deterministic multi-table generation, strict validation/quarantine, PostgreSQL schemas and financial marts, six SQL analyses, Excel audit workbook, anomaly investigation, trained churn models, score exports, executed notebooks and documentation.
 
-**Portfolio delivery is complete.** Excel workbook checks and Power BI project schema validation are recorded in the delivery report. Desktop Excel refresh, Power BI rendering and refresh, and the final `.pbix` export remain deferred.
-
-See [portfolio notes](docs/PORTFOLIO_NOTES.md) for resume bullets, project findings, and interview talking points.
+**Status:** the data pipeline, SQL marts, Excel audit workbook, churn models and notebooks are complete and tested. The Power BI project passes schema validation, but it has not yet been opened in Power BI Desktop, so there is no rendered dashboard or `.pbix` export yet. Excel PivotTable refresh has likewise not been checked in desktop Excel. See [delivery report](reports/DELIVERY_REPORT.md).
 
 ## Start
 
@@ -28,8 +28,8 @@ See [runbook](docs/runbook.md) for artifact refresh, database configuration, env
 - [Excel audit](excel/RevPulse_Validation_Audit.xlsx): 2025 invoicing and payment-delay audit, XLOOKUP enrichment, two native PivotTables and independent SQL controls.
 - [Power BI project](dashboard/RevPulse.pbip): revenue/retention, collection/account actions, and definitions/quality pages.
 - [Executed EDA notebook](notebooks/01_data_quality_and_eda.ipynb) and [churn evaluation](notebooks/02_churn_evaluation.ipynb).
-- [Executive findings](reports/executive_summary.md), [model card](docs/model_card.md), [metric dictionary](docs/metric_dictionary.md), and [cleaning log](DATA_CLEANING_LOG.md).
-- [Verification ledger](reports/implementation_status.json) records implemented, verified and deferred requirements.
+- [Executive findings](reports/executive_summary.md), [model card](docs/model_card.md), [metric dictionary](docs/metric_dictionary.md), and [cleaning log](docs/DATA_CLEANING_LOG.md).
+- [Delivery report](reports/DELIVERY_REPORT.md) lists each requirement with its evidence file and status.
 
 ## Architecture
 
@@ -55,3 +55,7 @@ At 2025-12-31, simulated MRR is ₹3,622,900.00 across 651 active accounts. Sele
 ## Limits
 
 Fixed-price INR subscriptions, business-date events, no usage-based pricing, credit-note accounting, tax compliance, real-time ingestion or live customer outreach. Model indicators are associative. See the metric dictionary for churn/retention and plan-segmentation semantics.
+
+## License
+
+MIT. See [LICENSE](LICENSE). All data is synthetic.
