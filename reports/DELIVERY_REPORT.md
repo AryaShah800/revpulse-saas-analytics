@@ -2,7 +2,7 @@
 
 Automated tests: **12 passed**. Independent-environment reproduction passed.
 
-**Portfolio delivery complete. Native Excel and Power BI acceptance remains deferred.**
+**Portfolio delivery complete. Power BI Desktop acceptance done 2026-11-14 (built locally, not published); native Excel acceptance remains deferred.**
 
 | ID | Requirement | Status | Evidence |
 |---|---|---|---|
@@ -23,9 +23,9 @@ Automated tests: **12 passed**. Independent-environment reproduction passed.
 | R15 | Two native PivotTables with caches and source references | verified | reports/workbook/verification.json |
 | R16 | Workbook visual inspection across all six sheets | verified | reports/workbook/Overview.png, reports/workbook/Cleaned_Master.png, reports/workbook/Customers.png, reports/workbook/Payments.png, reports/workbook/Audit_Pivots.png, reports/workbook/Reconciliation.png |
 | R17 | Native Excel open, input-change recalculation and pivot refresh | deferred_by_user | README.md (Limits) |
-| R18 | Power BI project with two main pages and audit view | implemented_schema_verified | reports/powerbi_schema_validation.json |
-| R19 | Semantic model relationships, snapshot measures and risk integration | implemented_native_unverified | reports/powerbi_schema_validation.json |
-| R20 | Native Power BI refresh, visual/filter inspection, PBIX and screenshots | deferred_by_user | README.md (Limits) |
+| R18 | Power BI project with two main pages and audit view | verified_in_desktop | dashboard/RevPulse.pbip, dashboard/RevPulse.pdf |
+| R19 | Semantic model relationships, snapshot measures and risk integration | verified_in_desktop | dashboard/RevPulse.pbix, dashboard/page-1.png to page-3.png |
+| R20 | Native Power BI refresh, visual/filter inspection, PBIX and screenshots | verified_in_desktop (refresh used the 2026-11-07 export; scatter axes fixed to Average) | dashboard/RevPulse.pbix, dashboard/RevPulse.pdf, dashboard/page-1.png to page-3.png |
 | R21 | Contract billing exceptions, peer IQR, support spikes and defect evaluation | verified | reports/defect_evaluation.json |
 | R22 | EDA and single-snapshot exploratory hypothesis with uncertainty | verified | reports/hypothesis_result.json |
 | R23 | Point-in-time features and future-observation invariance | verified | reports/test_results.xml |

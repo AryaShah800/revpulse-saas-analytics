@@ -1,0 +1,166 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1208.3965714793458,
+            "y": 237.4048091329982
+          },
+          "nodeIndex": "Anomalies",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1442.3965714793458,
+            "y": 392.18502020839753
+          },
+          "nodeIndex": "Bridge",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1726.3965714793458,
+            "y": 368.18502020839753
+          },
+          "nodeIndex": "Cohorts",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 139.665749103341,
+            "y": 165.96496066919292
+          },
+          "nodeIndex": "CustomerMonth",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 618.712918705839,
+            "y": 306.19822406580033
+          },
+          "nodeIndex": "Customers",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 923.6495459539899,
+            "y": 325.1892596693155
+          },
+          "nodeIndex": "Dates",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 845.29785276341352,
+            "y": 562.37004041679529
+          },
+          "nodeIndex": "Invoices",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2010.3965714793458,
+            "y": 344.18502020839753
+          },
+          "nodeIndex": "Metadata",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 578.25063870747522
+          },
+          "nodeIndex": "Plans",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2294.3965714793458,
+            "y": 356.18502020839753
+          },
+          "nodeIndex": "Quality",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 337.83740173699664,
+            "y": 561.23144729214141
+          },
+          "nodeIndex": "Risk",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 429.5787473590251,
+            "y": -50
+          },
+          "nodeIndex": "TopRisk",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

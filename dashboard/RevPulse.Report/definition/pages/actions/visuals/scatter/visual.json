@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "scatter",
   "position": {
     "x": 570,
     "y": 255,
     "z": 0,
-    "width": 850,
     "height": 255,
+    "width": 850,
     "tabOrder": 825
   },
   "visual": {
@@ -27,43 +27,8 @@
                 }
               },
               "queryRef": "Risk.company_name",
-              "nativeQueryRef": "company_name"
-            }
-          ]
-        },
-        "X": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Risk"
-                    }
-                  },
-                  "Property": "usage_ratio"
-                }
-              },
-              "queryRef": "Risk.usage_ratio",
-              "nativeQueryRef": "usage_ratio"
-            }
-          ]
-        },
-        "Y": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Risk"
-                    }
-                  },
-                  "Property": "mrr_inr"
-                }
-              },
-              "queryRef": "Risk.mrr_inr",
-              "nativeQueryRef": "mrr_inr"
+              "nativeQueryRef": "company_name",
+              "active": true
             }
           ]
         },
@@ -84,10 +49,56 @@
               "nativeQueryRef": "risk_category"
             }
           ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Risk"
+                        }
+                      },
+                      "Property": "usage_ratio"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Risk.usage_ratio",
+              "nativeQueryRef": "Average of usage_ratio",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Risk"
+                        }
+                      },
+                      "Property": "mrr_inr"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Risk.mrr_inr",
+              "nativeQueryRef": "Average of mrr_inr"
+            }
+          ]
         }
       }
     },
-    "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
       "title": [
         {
@@ -158,6 +169,77 @@
           }
         }
       ]
-    }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "47ab549c699781700652",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Risk"
+              }
+            },
+            "Property": "company_name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "c4c37e5849bca9a36eac",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Risk"
+              }
+            },
+            "Property": "risk_category"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "658675c5db52108e0360",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Risk"
+                  }
+                },
+                "Property": "usage_ratio"
+              }
+            },
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f381cbf43278d2e2b3e7",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Risk"
+                  }
+                },
+                "Property": "mrr_inr"
+              }
+            },
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

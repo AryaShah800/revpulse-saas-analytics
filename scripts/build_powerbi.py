@@ -17,22 +17,29 @@ def literal(value):
     else:value=str(value)+'D'
     return {'expr':{'Literal':{'Value':value}}}
 
-def field(table,col,measure=False):return {'Measure' if measure else 'Column':{'Expression':{'SourceRef':{'Entity':table}},'Property':col}}
-def projection(table,col,measure=False):return {'field':field(table,col,measure),'queryRef':table+'.'+col,'nativeQueryRef':col}
+def field(table,col,measure=False,aggregation=None):
+    value={'Measure' if measure else 'Column':{'Expression':{'SourceRef':{'Entity':table}},'Property':col}}
+    return {'Aggregation':{'Expression':value,'Function':aggregation}} if aggregation is not None else value
+def projection(table,col,measure=False,aggregation=None):return {'field':field(table,col,measure,aggregation),'queryRef':table+'.'+col,'nativeQueryRef':('Average of ' if aggregation==1 else '')+col}
 
 def visual(page,name,kind,x,y,w,h,title,roles):
     query={role:{'projections':[projection(*item) for item in items]} for role,items in roles.items()}
     v={'$schema':SCHEMA+'visualContainer/2.4.0/schema.json','name':name,'position':{'x':x,'y':y,'z':0,'width':w,'height':h,'tabOrder':y+x},'visual':{'visualType':kind,'query':{'queryState':query},'drillFilterOtherVisuals':True,'visualContainerObjects':{'title':[{'properties':{'show':literal(True),'text':literal(title),'fontSize':literal(12),'fontColor':{'solid':{'color':literal('#19324F')}}}}],'background':[{'properties':{'show':literal(True),'color':{'solid':{'color':literal('#FFFFFF')}},'transparency':literal(0)}}]}}}
     json_write(REPORT/'definition/pages'/page/'visuals'/name/'visual.json',v)
 
-def main():
+def prepare_data():
+    """Refresh CSV helpers without overwriting a report edited in Desktop."""
     run=current_run(ROOT);cfg=json.loads((run/'manifest.json').read_text())['configuration']
     pd.DataFrame({'plan_tier':['Starter','Growth','Enterprise','Inactive']}).to_csv(DATA/'dim_plan.csv',index=False)
     pd.DataFrame({'stage':['New','Expansion','Reactivation','Contraction','Churn'],'sort':[1,2,3,4,5]}).to_csv(DATA/'dim_bridge.csv',index=False)
-    pd.read_csv(DATA/'churn_predictions.csv').head(20).to_csv(DATA/'top20_risk.csv',index=False)
+    pd.read_csv(DATA/'churn_predictions.csv').sort_values('churn_probability',ascending=False).head(20).to_csv(DATA/'top20_risk.csv',index=False)
     quality=json.loads((run/'audit/quality.json').read_text())
     pd.DataFrame([{'table_name':k,**v} for k,v in quality['tables'].items()]).to_csv(DATA/'quality_summary.csv',index=False)
     pd.DataFrame([{'cutoff':cfg['cutoff'],'run_id':run.name,'data_type':'Synthetic demonstration','definitions':'MRR excludes tax and one-time charges. High-risk MRR is exposure, not guaranteed loss.','coverage':'Quarantined records excluded; see quality table.','model':'Chronological test; synthetic performance does not establish real-world effectiveness.'}]).to_csv(DATA/'report_metadata.csv',index=False)
+    return run,cfg
+
+def main():
+    run,cfg=prepare_data()
     sources={'Customers':'customers','Dates':'dim_date','Plans':'dim_plan','CustomerMonth':'mart_customer_month','Invoices':'mart_invoice_aging','Risk':'churn_predictions','TopRisk':'top20_risk','Anomalies':'billing_anomalies','Bridge':'dim_bridge','Quality':'quality_summary','Metadata':'report_metadata','Cohorts':'mart_cohort_retention'}
     tables=[]
     date_cols={'month','month_end','issue_date','due_date','service_from','service_to','cutoff','score_date','signup_date','cohort'}
@@ -88,7 +95,7 @@ def main():
     visual('actions','region','slicer',20,160,450,80,'Region',{'Values':[('Customers','region')]})
     visual('actions','plan','slicer',490,160,450,80,'Plan',{'Values':[('Plans','plan_tier')]})
     visual('actions','aging','clusteredBarChart',20,255,530,255,'Outstanding balances by aging bucket (INR)',{'Category':[('Invoices','aging_bucket')],'Y':[('CustomerMonth','Outstanding INR',True)]})
-    visual('actions','scatter','scatterChart',570,255,850,255,'Usage and MRR by current risk category',{'Category':[('Risk','company_name')],'X':[('Risk','usage_ratio')],'Y':[('Risk','mrr_inr')],'Series':[('Risk','risk_category')]})
+    visual('actions','scatter','scatterChart',570,255,850,255,'Usage and MRR by current risk category',{'Category':[('Risk','company_name')],'X':[('Risk','usage_ratio',False,1)],'Y':[('Risk','mrr_inr',False,1)],'Series':[('Risk','risk_category')]})
     visual('actions','accounts','tableEx',20,530,1000,340,'Top 20 accounts by predicted risk (overall ranking)',{'Values':[('TopRisk',c) for c in ['company_name','churn_probability','risk_category','mrr_inr','overdue_inr','usage_change','score_date']]})
     visual('actions','exceptions','tableEx',1040,530,380,340,'Billing exceptions for investigation',{'Values':[('Anomalies',c) for c in ['record_id','rule','severity']]})
     visual('audit','quality','tableEx',20,20,900,300,'Source dispositions',{'Values':[('Quality',c) for c in ['table_name','input','accepted','duplicate','quarantined']]})

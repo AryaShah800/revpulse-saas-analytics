@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "bridge",
   "position": {
     "x": 20,
     "y": 570,
     "z": 0,
-    "width": 850,
     "height": 300,
+    "width": 850,
     "tabOrder": 590
   },
   "visual": {
@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "Bridge.stage",
-              "nativeQueryRef": "stage"
+              "nativeQueryRef": "stage",
+              "active": true
             }
           ]
         },
@@ -51,7 +52,6 @@
         }
       }
     },
-    "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
       "title": [
         {
@@ -122,6 +122,7 @@
           }
         }
       ]
-    }
+    },
+    "drillFilterOtherVisuals": true
   }
 }

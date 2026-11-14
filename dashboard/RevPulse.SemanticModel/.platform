@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "RevPulse"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0096fad1-5758-4979-a464-a4c1c810a275"
+  }
+}

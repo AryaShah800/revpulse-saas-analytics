@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "slicer0",
   "position": {
     "x": 20,
     "y": 165,
     "z": 0,
-    "width": 450,
     "height": 90,
+    "width": 450,
     "tabOrder": 185
   },
   "visual": {
@@ -27,13 +27,13 @@
                 }
               },
               "queryRef": "Dates.month",
-              "nativeQueryRef": "month"
+              "nativeQueryRef": "month",
+              "active": true
             }
           ]
         }
       }
     },
-    "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
       "title": [
         {
@@ -104,6 +104,7 @@
           }
         }
       ]
-    }
+    },
+    "drillFilterOtherVisuals": true
   }
 }

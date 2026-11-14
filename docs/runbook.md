@@ -41,19 +41,4 @@ The workbook includes XLOOKUPs, actual native PivotTables, validation, condition
 
 Open `dashboard/RevPulse.pbip` in Power BI Desktop. DataFolder is an editable Power Query parameter; regenerate the project after relocating the repository or change this parameter. Refresh, verify the latest-month cards against mart_revenue_month.csv, then compare region/plan/date selections with customer-month SQL. Check that selecting multiple months still shows latest-month MRR. The actions page is a cutoff snapshot; the top-20 table is globally ranked before slicer filtering.
 
-The project contains two main pages plus an audit/definitions page. Native refresh, DAX evaluation, visual screenshots and Save As `RevPulse_BI_Dashboard.pbix` remain deferred. PBIR schema checks are not a substitute for native checks. The downloaded signed installer is at D:\RevPulseRuntime\PBIDesktopSetup_x64.exe; administrator elevation is required. The prior installer attempt failed elevation despite returning exit code 0; its log records the failure. Do not interpret installer exit code alone as success.
-
-Official format references: [report folders](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report), [semantic model folders](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-dataset).
-
-## Notebooks and reproducibility
-
-```powershell
-.\.venv\Scripts\python.exe -m ipykernel install --user --name revpulse --display-name 'Python (RevPulse)'
-.\.venv\Scripts\python.exe scripts/create_analysis_notebooks.py
-```
-
-Notebooks are saved with executed outputs. The hypothesis test uses a fixed single-month snapshot, not repeated customer-months as independent observations. Model evaluation consumes saved results and does not retune on test data.
-
-`scripts/verify_clean_environment.ps1` creates a separate source checkout and virtual environment, installs the lock, runs tests and the complete 1,000-account pipeline. Supply a new verification directory for each run. Its test report is copied to reports/fresh_environment_tests.xml.
-
-On this workstation `.venv` is a junction to D:\RevPulseRuntime\venv to avoid exhausting C:. This is a local storage arrangement, not required on other machines.
+The project contains two main pages plus an audit/definitions page. It was opened, refreshed and checked in Power BI Desktop on 2026-11-14 and saved as `dashboard/RevPulse.pbix` with `RevPulse.pdf` and `page-1.png` to `page-3.png`. Desktop rewrote some PBIR/model files when saving; do not overwrite them with generator output (`scripts/build_powerbi.py`). The saved `DataFolder` points to an earlier export folder; see the README for what that means.

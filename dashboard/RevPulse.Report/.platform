@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "RevPulse"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "93a5d286-6a41-4c27-9880-db183be76eac"
+  }
+}
