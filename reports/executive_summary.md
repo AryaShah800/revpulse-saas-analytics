@@ -22,4 +22,4 @@ Invoice totals, net collections, MRR, distinct accounts, balances and the MRR br
 
 ## Status
 
-Native Excel refresh/editing and Power BI refresh/render/save-to-PBIX have not been done. The XLSX structure/formulas/cached totals and PBIP JSON definitions have been checked independently, but there is no rendered dashboard or `.pbix` yet.
+The Power BI report was opened, refreshed and checked in Power BI Desktop; `dashboard/RevPulse.pbix`, `RevPulse.pdf` and page images are saved but not published to the Power BI Service. A browser-viewable version is `docs/index.html`. Native Excel PivotTable refresh has not been checked in desktop Excel.
