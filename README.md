@@ -4,6 +4,8 @@
 
 Reproducible B2B SaaS revenue, billing quality and retention analytics. **All data is synthetic.** The project separates recurring revenue, invoicing and cash collections, preserves source lineage, and evaluates churn predictions using chronological splits.
 
+**Live report: https://aryashah800.github.io/revpulse-saas-analytics/** (GitHub Pages, built from `docs/`)
+
 **Business question:** where is recurring revenue, billing and retention healthy or leaking in a B2B SaaS business, and what should finance and customer success do about it?
 
 ## Interactive report (findings first)
